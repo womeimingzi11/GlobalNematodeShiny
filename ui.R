@@ -36,30 +36,43 @@ ui <- bootstrapPage(
     tabPanel(
       # Sidebar with a slider input for number of bins
       "Analysis",
-      fluidRow(column(5,
-                      h4(
-                        "Author:",
-                        a(href = "https://blog.washman.top", "Han Chen"),
-                        "and Wanyanhan Jiang"
-                      )),
-               column(3,
-                      h5(
-                        a(href = "mailto://chenhan28@gmail.com", "chenhan28@gmail.com")
-                      )),
-               column(3,
-                      h6("Version: 20211208"))),
+      fluidRow(
+        column(
+          5,
+          h4(
+            "Author:",
+            a(href = "https://blog.washman.top", "Han Chen"),
+            "and Wanyanhan Jiang"
+          )
+        ),
+        column(
+          3,
+          h5(
+            a(href = "mailto://chenhan28@gmail.com", "chenhan28@gmail.com")
+          )
+        ),
+        column(
+          3,
+          h6("Version: 20211208")
+        )
+      ),
       sidebarLayout(
         sidebarPanel(
           radioButtons(
             "data_source",
             "File Source:",
-            choices = list("Internel Demo" = "demo",
-                           "Upload a File" = "file"),
+            choices = list(
+              "Internel Demo" = "demo",
+              "Upload a File" = "file"
+            ),
             selected = "demo"
           ),
           helpText(
-            "Internel demo data comes from sampling sites of following paper:\n",
-            a(href = "https://doi.org/10.3390/d13080369", "https://doi.org/10.3390/d13080369")
+            "Internel demo comes from following paper:\n",
+            a(
+              href = "https://doi.org/10.3390/d13080369",
+              "https://doi.org/10.3390/d13080369"
+            )
           ),
           radioButtons(
             "extract_method",
@@ -74,17 +87,27 @@ ui <- bootstrapPage(
         # Show a plot of the generated distribution
         mainPanel(
           tabsetPanel(
-            tabPanel(title = ("Map Viewer"),
-                     leafletOutput("map_viewer")),
-            tabPanel(title = ("Extract Spatial Data"),
-                     DTOutput("extract_data")
-                     )
-            )
+            tabPanel(
+              title = ("Map Viewer"),
+              leafletOutput("map_viewer")
+            ),
+            tabPanel(
+              title = ("Extract Point Values"),
+              DTOutput("extract_data")
+            ),
+            tabPanel(
+              title = ("Crop Sub Map"),
+              actionButton(
+                "crop_sub_map",
+                "Crop Sub Map"
+              )
+            ),
           )
+        )
       )
     ),
     tabPanel(
       "Acknowledgements and References"
-      )
+    )
   )
 )
